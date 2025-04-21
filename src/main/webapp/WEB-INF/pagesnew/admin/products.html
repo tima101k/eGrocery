@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products - eGrocery Admin</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">eGrocery Admin</a>
+            <ul class="nav-links">
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="customers.html">Customers</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1>Manage Products</h1>
+            <button class="btn btn-primary">Add New Product</button>
+        </div>
+
+        <div class="card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Organic Bananas</td>
+                        <td>Fruits</td>
+                        <td>$2.99</td>
+                        <td>50</td>
+                        <td>
+                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
+                            <button class="btn" style="color: red;">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Fresh Milk</td>
+                        <td>Dairy</td>
+                        <td>$3.49</td>
+                        <td>30</td>
+                        <td>
+                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
+                            <button class="btn" style="color: red;">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Whole Wheat Bread</td>
+                        <td>Bakery</td>
+                        <td>$4.99</td>
+                        <td>25</td>
+                        <td>
+                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
+                            <button class="btn" style="color: red;">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
