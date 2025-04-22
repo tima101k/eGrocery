@@ -7,9 +7,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 
 import com.eGrocery.service.RegisterService;
+import com.eGrocery.utils.ValidationUtil;
 import com.eGrocery.model.RegisterModel;
 
 
@@ -43,38 +46,129 @@ public class RegistrationController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		try {
-			System.out.println("1");
+			// Validate and extract user model
+			String validationMessage = validateRegistrationForm(request);
+			if (validationMessage != null) {
+				System.out.println(validationMessage);
+				handleError(request, response, validationMessage);
+				return;
+			}
+						
 			RegisterModel registerModel = extractUserModel(request);
-			System.out.println("2");
 			Boolean isAdded = registerService.addUser(registerModel);
+			if(isAdded == null) {
+				handleError(request, response, "Our server is under maintenance. Please try again later!");
+			}else if(isAdded) {
+				handleSuccess(request, response, "Your account is successfully created!", "/WEB-INF/pages/login.jsp");
+			};
 		} catch (Exception e){
+			System.out.println(e);
 			System.out.println("Something went wrong here");
-
 		}
 		
 	}
 	
 	private RegisterModel extractUserModel(HttpServletRequest req) throws Exception {
 		String firstName = req.getParameter("firstName");
-		// String middleName = req.getParameter("middleName");
 		String lastName = req.getParameter("lastName");
-		// LocalDate dob = LocalDate.parse(req.getParameter("dob"));
 		String email = req.getParameter("email");
 		String number = req.getParameter("phone");
-
 		String password = req.getParameter("password");
-		String password2 = req.getParameter("confirmPassword");
-		// int roleId = Integer.parseInt(req.getParameter("roleId"));
-
-		// Assuming password validation is already done in validateRegistrationForm
-		// TODO
-		// password = PasswordUtil.encrypt(username, password);
-		
 		return new RegisterModel(1, firstName, lastName, email, number, password);
 		
 	}
+	
+	
+	private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
+			throws ServletException, IOException {
+		req.setAttribute("success", message);
+		req.getRequestDispatcher(redirectPage).forward(req, resp);
+	}
+	
+	private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
+			throws ServletException, IOException {
+		req.setAttribute("error", message);
+		req.setAttribute("firstName", req.getParameter("firstName"));
+		req.setAttribute("lastName", req.getParameter("lastName"));
+		req.setAttribute("username", req.getParameter("username"));
+		req.setAttribute("dob", req.getParameter("dob"));
+		req.setAttribute("gender", req.getParameter("gender"));
+		req.setAttribute("email", req.getParameter("email"));
+		req.setAttribute("phone", req.getParameter("phone"));
+		req.setAttribute("subject", req.getParameter("subject"));
+		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+	}
+	
+	private String validateRegistrationForm(HttpServletRequest req) {
+		String firstName = req.getParameter("firstName");
+		String lastName = req.getParameter("lastName");
+//		String username = req.getParameter("username");
+//		String dobStr = req.getParameter("dob");
+//		String gender = req.getParameter("gender");
+		String email = req.getParameter("email");
+		String number = req.getParameter("phone");
+//		String subject = req.getParameter("subject");
+		String password = req.getParameter("password");
+		String retypePassword = req.getParameter("confirmPassword");
+
+		// Check for null or empty fields first
+		if (ValidationUtil.isNullOrEmpty(firstName))
+			return "First name is required.";
+		if (ValidationUtil.isNullOrEmpty(lastName))
+			return "Last name is required.";
+//		if (ValidationUtil.isNullOrEmpty(username))
+//			return "Username is required.";
+//		if (ValidationUtil.isNullOrEmpty(dobStr))
+//			return "Date of birth is required.";
+//		if (ValidationUtil.isNullOrEmpty(gender))
+//			return "Gender is required.";
+		if (ValidationUtil.isNullOrEmpty(email))
+			return "Email is required.";
+		if (ValidationUtil.isNullOrEmpty(number))
+			return "Phone number is required.";
+//		if (ValidationUtil.isNullOrEmpty(subject))
+//			return "Subject is required.";
+		if (ValidationUtil.isNullOrEmpty(password))
+			return "Password is required.";
+		if (ValidationUtil.isNullOrEmpty(retypePassword))
+			return "Please retype the password.";
+
+		// Convert date of birth
+//		LocalDate dob;
+//		try {
+//			dob = LocalDate.parse(dobStr);
+//		} catch (Exception e) {
+//			return "Invalid date format. Please use YYYY-MM-DD.";
+//		}
+
+		// Validate fields
+//		if (!ValidationUtil.isAlphanumericStartingWithLetter(username))
+//			return "Username must start with a letter and contain only letters and numbers.";
+//		if (!ValidationUtil.isValidGender(gender))
+//			return "Gender must be 'male' or 'female'.";
+		if (!ValidationUtil.isValidEmail(email))
+			return "Invalid email format.";
+		if (!ValidationUtil.isValidPhoneNumber(number))
+			return "Phone number must be 10 digits and start with 98.";
+//		if (!ValidationUtil.isValidPassword(password))
+//			return "Password must be at least 8 characters long, with 1 uppercase letter, 1 number, and 1 symbol.";
+		if (!ValidationUtil.doPasswordsMatch(password, retypePassword))
+			return "Passwords do not match.";
+
+		// Check if the date of birth is at least 16 years before today
+//		if (!ValidationUtil.isAgeAtLeast16(dob))
+//			return "You must be at least 16 years old to register.";
+//		try {
+//			Part image = req.getPart("image");
+//			if (!ValidationUtil.isValidImageExtension(image))
+//				return "Invalid image format. Only jpg, jpeg, png, and gif are allowed.";
+//		} catch (IOException | ServletException e) {
+//			return "Error handling image file. Please ensure the file is valid.";
+//		}
+
+		return null; // All validations passed
+	}
+
 
 }
