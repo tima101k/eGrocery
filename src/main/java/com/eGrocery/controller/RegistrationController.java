@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 
 import com.eGrocery.service.RegisterService;
+import com.eGrocery.utils.PasswordUtil;
 import com.eGrocery.utils.ValidationUtil;
 import com.eGrocery.model.RegisterModel;
 
@@ -75,7 +76,9 @@ public class RegistrationController extends HttpServlet {
 		String email = req.getParameter("email");
 		String number = req.getParameter("phone");
 		String password = req.getParameter("password");
-		return new RegisterModel(1, firstName, lastName, email, number, password);
+		
+		String encPassword = PasswordUtil.encrypt(email, password);
+		return new RegisterModel(1, firstName, lastName, email, encPassword, number);
 		
 	}
 	

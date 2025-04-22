@@ -19,15 +19,17 @@
       <div class="form-section">
         <span class="close">&times;</span>
         <h2>Welcome Back</h2>
-        <form id="loginForm">
-          <input type="text" id="mobile" placeholder="Mobile Number or Email" required />
-          <input type="password" id="password" placeholder="Password" required />
+        <form id="loginForm"
+        action="${pageContext.request.contextPath}/login"
+       	method="post">
+          <input type="text" name="email" id="mobile" placeholder="Mobile Number or Email" required />
+          <input type="password" name="password" id="password" placeholder="Password" required />
           <div class="forgot">
             <a href="#">Forgot Password?</a>
           </div>
           <button type="submit">Login to Your Account</button>
           <p class="register-text">
-            Don't have an account yet? <a href="register.html">Create Account</a>
+            Don't have an account yet? <a href="${pageContext.request.contextPath}/register">Create Account</a>
           </p>
           <p id="errorMsg"></p>
         </form>
