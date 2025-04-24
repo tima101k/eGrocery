@@ -1,5 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+
+<%@ page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="jakarta.servlet.http.HttpServletRequest"%>
+
+
+<%
+// Initialize necessary objects and variables
+HttpSession userSession = request.getSession(false);
+String currentUser = (String) (userSession != null ? userSession.getAttribute("email") : null);
+// need to add data in attribute to select it in JSP code using JSTL core tag
+pageContext.setAttribute("currentUser", currentUser);
+%>
+
+<!-- Set contextPath variable -->
+<%-- <c:set var="contextPath" value="${pageContext.request.contextPath}" /> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +50,7 @@
         <div class="profile-details">
           <div class="detail-group">
             <label>Email Address</label>
-            <p>johndoe@example.com</p>
+            <p>${currentUser}</p>
           </div>
           
           <div class="detail-group">

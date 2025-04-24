@@ -16,9 +16,10 @@
                 <ul class="nav-links">
                     <li><a href="${pageContext.request.contextPath}/category">Categories</a></li>
                     <li><a href="${pageContext.request.contextPath}/products"">Products</a></li>
-                <li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
+                	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
                     <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                     <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                    <li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
                 </ul>
             </div>
         </nav>
