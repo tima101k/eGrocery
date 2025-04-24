@@ -19,10 +19,9 @@ public class RegisterModel {
 			String firstName, 
 			String lastName, 
 			String email,
-			String phone, 
-			String password
+			String password,
+			String phone
 		) {
-		System.out.println("3e");
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -73,7 +72,7 @@ public class RegisterModel {
 	}
 	
 	public String getPassword() {
-		return phone;
+		return password;
 	}
 
 	public void setPassword(String passwrod) {

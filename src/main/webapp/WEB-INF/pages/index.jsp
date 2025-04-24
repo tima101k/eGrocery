@@ -1,21 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>eGrocery - Fresh Groceries Delivered</title>
     <link rel="stylesheet" href="css/style.css">
+=======
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/index.css" />
+>>>>>>> 08e263f065840e385f8896d861bdf016d6dcddf3
 </head>
 <body>
     <nav class="navbar">
         <div class="container navbar-container">
             <a href="index.html" class="logo">eGrocery</a>
             <ul class="nav-links">
+<<<<<<< HEAD
                 <li><a href="categories.html">Categories</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="cart.html">Cart</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html">Register</a></li>
+=======
+                <li><a href="${pageContext.request.contextPath}/category">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/products"">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/cart"">Cart</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+>>>>>>> 08e263f065840e385f8896d861bdf016d6dcddf3
             </ul>
         </div>
     </nav>

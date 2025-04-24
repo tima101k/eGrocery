@@ -47,7 +47,9 @@ public class RegisterService {
 			insertStmt.setString(3, registerModel.getEmail());
 			insertStmt.setString(4, registerModel.getPassword());
 			insertStmt.setString(5, registerModel.getPhoneNumber());
-
+			
+			System.out.print(registerModel.getPassword());
+			System.out.print(registerModel.getPhoneNumber());
 
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {

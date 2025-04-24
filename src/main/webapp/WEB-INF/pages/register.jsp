@@ -25,13 +25,14 @@
             <input type="text" name="lastName" placeholder="Last Name" required />
           </div>
           <input type="email" name="email" placeholder="Email Address" required />
-          <input type="tel" name="phone" placeholder="Mobile Number (Optional)" />
+          <input type="tel" name="phone" placeholder="Mobile Number" required/>
           <input type="password" name="password" placeholder="Create Password" required />
           <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+          <input type="file" id="profileImage" name="profileImage" accept="image/*" required />
           <button type="submit">Create Your Account</button>
         </form>
         <p class="register-text">
-          Already have an account? <a href="login.html">Login here</a>
+          Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a>
         </p>
       </div>
     </div>
