@@ -19,7 +19,8 @@
         <h2>EGrocery</h2>
         <form 
         	action="${pageContext.request.contextPath}/register" 
-        	method="post">
+        	method="post"
+        	enctype="multipart/form-data">
           <div class="name-fields">
             <input type="text" name="firstName" placeholder="First Name" required />
             <input type="text" name="lastName" placeholder="Last Name" required />

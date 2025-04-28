@@ -36,8 +36,8 @@ public class RegisterService {
 			return null;
 		}
 
-		String insertQuery = "INSERT INTO user (firstname, lastname, email, password, phone) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String insertQuery = "INSERT INTO user (firstname, lastname, email, password, phone, image_url) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
@@ -47,9 +47,8 @@ public class RegisterService {
 			insertStmt.setString(3, registerModel.getEmail());
 			insertStmt.setString(4, registerModel.getPassword());
 			insertStmt.setString(5, registerModel.getPhoneNumber());
+			insertStmt.setString(6, registerModel.getImageUrl());
 			
-			System.out.print(registerModel.getPassword());
-			System.out.print(registerModel.getPhoneNumber());
 
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {

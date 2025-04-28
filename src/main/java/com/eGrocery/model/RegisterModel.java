@@ -11,6 +11,7 @@ public class RegisterModel {
 	private String email;
 	private String password;
 	private String phone;
+	private String imageUrl;
 	
 	// RegisterModel
 	
@@ -20,7 +21,8 @@ public class RegisterModel {
 			String lastName, 
 			String email,
 			String password,
-			String phone
+			String phone,
+			String imageUrl
 		) {
 		this.id = id;
 		this.firstName = firstName;
@@ -28,6 +30,7 @@ public class RegisterModel {
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
+		this.imageUrl = imageUrl;
 	}
 	
 	public int getId() {
@@ -77,5 +80,13 @@ public class RegisterModel {
 
 	public void setPassword(String passwrod) {
 		this.password = passwrod;
+	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

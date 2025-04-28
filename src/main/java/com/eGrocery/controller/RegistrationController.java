@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
@@ -15,14 +16,19 @@ import com.eGrocery.service.RegisterService;
 import com.eGrocery.utils.PasswordUtil;
 import com.eGrocery.utils.ValidationUtil;
 import com.eGrocery.model.RegisterModel;
+import com.eGrocery.utils.ImageUtil;
 
 
 /**
  * Servlet implementation class eGrocery
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final ImageUtil imageUtil = new ImageUtil();
 	
 	private final RegisterService registerService = new RegisterService();
        
@@ -61,6 +67,16 @@ public class RegistrationController extends HttpServlet {
 			if(isAdded == null) {
 				handleError(request, response, "Our server is under maintenance. Please try again later!");
 			}else if(isAdded) {
+				try {
+					if (uploadImage(request)) {
+						handleSuccess(request, response, "Your account is successfully created!", "/WEB-INF/pages/login.jsp");
+					} else {
+						handleError(request, response, "Could not upload the image. Please try again later!");
+					}
+				} catch (IOException | ServletException e) {
+					handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+					e.printStackTrace(); // Log the exception
+				}
 				handleSuccess(request, response, "Your account is successfully created!", "/WEB-INF/pages/login.jsp");
 			};
 		} catch (Exception e){
@@ -77,8 +93,11 @@ public class RegistrationController extends HttpServlet {
 		String number = req.getParameter("phone");
 		String password = req.getParameter("password");
 		
+		Part image = req.getPart("profileImage");
+		String imageUrl = imageUtil.getImageNameFromPart(image);
+		
 		String encPassword = PasswordUtil.encrypt(email, password);
-		return new RegisterModel(1, firstName, lastName, email, encPassword, number);
+		return new RegisterModel(1, firstName, lastName, email, encPassword, number,imageUrl);
 		
 	}
 	
@@ -90,7 +109,8 @@ public class RegistrationController extends HttpServlet {
 	}
 	
 	private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
-			throws ServletException, IOException {
+			throws ServletException, IOException 
+	{
 		req.setAttribute("error", message);
 		req.setAttribute("firstName", req.getParameter("firstName"));
 		req.setAttribute("lastName", req.getParameter("lastName"));
@@ -105,13 +125,9 @@ public class RegistrationController extends HttpServlet {
 	
 	private String validateRegistrationForm(HttpServletRequest req) {
 		String firstName = req.getParameter("firstName");
-		String lastName = req.getParameter("lastName");
-//		String username = req.getParameter("username");
-//		String dobStr = req.getParameter("dob");
-//		String gender = req.getParameter("gender");
+		String lastName = req.getParameter("lastName");;
 		String email = req.getParameter("email");
 		String number = req.getParameter("phone");
-//		String subject = req.getParameter("subject");
 		String password = req.getParameter("password");
 		String retypePassword = req.getParameter("confirmPassword");
 
@@ -120,36 +136,14 @@ public class RegistrationController extends HttpServlet {
 			return "First name is required.";
 		if (ValidationUtil.isNullOrEmpty(lastName))
 			return "Last name is required.";
-//		if (ValidationUtil.isNullOrEmpty(username))
-//			return "Username is required.";
-//		if (ValidationUtil.isNullOrEmpty(dobStr))
-//			return "Date of birth is required.";
-//		if (ValidationUtil.isNullOrEmpty(gender))
-//			return "Gender is required.";
 		if (ValidationUtil.isNullOrEmpty(email))
 			return "Email is required.";
 		if (ValidationUtil.isNullOrEmpty(number))
 			return "Phone number is required.";
-//		if (ValidationUtil.isNullOrEmpty(subject))
-//			return "Subject is required.";
 		if (ValidationUtil.isNullOrEmpty(password))
 			return "Password is required.";
 		if (ValidationUtil.isNullOrEmpty(retypePassword))
 			return "Please retype the password.";
-
-		// Convert date of birth
-//		LocalDate dob;
-//		try {
-//			dob = LocalDate.parse(dobStr);
-//		} catch (Exception e) {
-//			return "Invalid date format. Please use YYYY-MM-DD.";
-//		}
-
-		// Validate fields
-//		if (!ValidationUtil.isAlphanumericStartingWithLetter(username))
-//			return "Username must start with a letter and contain only letters and numbers.";
-//		if (!ValidationUtil.isValidGender(gender))
-//			return "Gender must be 'male' or 'female'.";
 		if (!ValidationUtil.isValidEmail(email))
 			return "Invalid email format.";
 		if (!ValidationUtil.isValidPhoneNumber(number))
@@ -158,20 +152,14 @@ public class RegistrationController extends HttpServlet {
 //			return "Password must be at least 8 characters long, with 1 uppercase letter, 1 number, and 1 symbol.";
 		if (!ValidationUtil.doPasswordsMatch(password, retypePassword))
 			return "Passwords do not match.";
-
-		// Check if the date of birth is at least 16 years before today
-//		if (!ValidationUtil.isAgeAtLeast16(dob))
-//			return "You must be at least 16 years old to register.";
-//		try {
-//			Part image = req.getPart("image");
-//			if (!ValidationUtil.isValidImageExtension(image))
-//				return "Invalid image format. Only jpg, jpeg, png, and gif are allowed.";
-//		} catch (IOException | ServletException e) {
-//			return "Error handling image file. Please ensure the file is valid.";
-//		}
-
 		return null; // All validations passed
 	}
+	
+	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+		Part image = req.getPart("profileImage");
+		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "profile");
+	}
+
 
 
 }
