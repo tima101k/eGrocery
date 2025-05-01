@@ -4,9 +4,14 @@
 <%
 // Initialize necessary objects and variables
 HttpSession userSession = request.getSession(false);
-String currentUser = (String) (userSession != null ? userSession.getAttribute("email") : null);
+String email = (String) (userSession != null ? userSession.getAttribute("email") : null);
+String firstName = (String) (userSession != null ? userSession.getAttribute("firstName") : null);
+String lastName = (String) (userSession != null ? userSession.getAttribute("lastName") : null);
+String phone = (String) (userSession != null ? userSession.getAttribute("phone") : null);
+String imageUrl = (String) (userSession != null ? userSession.getAttribute("imageUrl") : null);
+String address = (String) (userSession != null ? userSession.getAttribute("address") : null);
 // need to add data in attribute to select it in JSP code using JSTL core tag
-pageContext.setAttribute("currentUser", currentUser);
+// pageContext.setAttribute("currentUser", currentUser);
 %>
 
 <!DOCTYPE html>
@@ -25,17 +30,17 @@ pageContext.setAttribute("currentUser", currentUser);
   <div class="container">
     <div class="profile-card">
       <div class="image-section">
-        <img src="/assets/LOGO.png" alt="Profile Illustration" class="side-image" />
+        <img src="${imageUrl}" alt="Profile Illustration" class="side-image" />
       </div>
       <div class="profile-section">
         <h1>EGrocery</h1>
         
         <div class="profile-header">
           <div class="profile-picture">
-            <img src="/api/placeholder/120/120" alt="Profile Picture" />
+            <img src="${pageContext.request.contextPath}${imageUrl}" alt="Profile Picture" />
           </div>
           <div class="profile-name">
-            <h2>John Doe</h2>			
+            <h2>${firstName}</h2>			
             <p class="member-since">Member since: April 15, 2025</p>
           </div>
         </div>
@@ -43,22 +48,17 @@ pageContext.setAttribute("currentUser", currentUser);
         <div class="profile-details">
           <div class="detail-group">
             <label>Email Address</label>
-            <p>${currentUser}</p>
+            <p>${email}</p>
           </div>
           
           <div class="detail-group">
             <label>Mobile Number</label>
-            <p>+1 (555) 123-4567</p>
+            <p>${phone}</p>
           </div>
           
           <div class="detail-group">
-            <label>Delivery Address</label>
-            <p>123 Green Street, Apt 4B<br>New York, NY 10001</p>
-          </div>
-          
-          <div class="detail-group">
-            <label>Preferred Payment Method</label>
-            <p>Credit Card (Visa ending in 4321)</p>
+            <label>Address</label>
+            <p>${address}</p>
           </div>
         </div>
         

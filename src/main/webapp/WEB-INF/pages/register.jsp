@@ -27,6 +27,7 @@
           </div>
           <input type="email" name="email" placeholder="Email Address" required />
           <input type="tel" name="phone" placeholder="Mobile Number" required/>
+          <input type="text" name="address" placeholder="Address" required/>
           <input type="password" name="password" placeholder="Create Password" required />
           <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
           <input type="file" id="profileImage" name="profileImage" accept="image/*" required />
