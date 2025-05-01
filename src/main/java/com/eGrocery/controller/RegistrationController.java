@@ -81,7 +81,7 @@ public class RegistrationController extends HttpServlet {
 			};
 		} catch (Exception e){
 			System.out.println(e);
-			System.out.println("Something went wrong here");
+			System.out.println("Something went wrong here on registration");
 		}
 		
 	}
@@ -91,13 +91,14 @@ public class RegistrationController extends HttpServlet {
 		String lastName = req.getParameter("lastName");
 		String email = req.getParameter("email");
 		String number = req.getParameter("phone");
+		String address = req.getParameter("address");
 		String password = req.getParameter("password");
 		
 		Part image = req.getPart("profileImage");
 		String imageUrl = imageUtil.getImageNameFromPart(image);
 		
 		String encPassword = PasswordUtil.encrypt(email, password);
-		return new RegisterModel(1, firstName, lastName, email, encPassword, number,imageUrl);
+		return new RegisterModel(1, firstName, lastName, email, address, encPassword, number,imageUrl);
 		
 	}
 	
@@ -118,6 +119,7 @@ public class RegistrationController extends HttpServlet {
 		req.setAttribute("dob", req.getParameter("dob"));
 		req.setAttribute("gender", req.getParameter("gender"));
 		req.setAttribute("email", req.getParameter("email"));
+		req.setAttribute("address", req.getParameter("address"));
 		req.setAttribute("phone", req.getParameter("phone"));
 		req.setAttribute("subject", req.getParameter("subject"));
 		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
@@ -127,6 +129,7 @@ public class RegistrationController extends HttpServlet {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");;
 		String email = req.getParameter("email");
+		String address = req.getParameter("address");
 		String number = req.getParameter("phone");
 		String password = req.getParameter("password");
 		String retypePassword = req.getParameter("confirmPassword");
@@ -138,6 +141,8 @@ public class RegistrationController extends HttpServlet {
 			return "Last name is required.";
 		if (ValidationUtil.isNullOrEmpty(email))
 			return "Email is required.";
+		if (ValidationUtil.isNullOrEmpty(address))
+			return "Address is required.";
 		if (ValidationUtil.isNullOrEmpty(number))
 			return "Phone number is required.";
 		if (ValidationUtil.isNullOrEmpty(password))
@@ -159,7 +164,5 @@ public class RegistrationController extends HttpServlet {
 		Part image = req.getPart("profileImage");
 		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "profile");
 	}
-
-
 
 }

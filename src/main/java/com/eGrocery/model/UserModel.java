@@ -2,10 +2,11 @@ package com.eGrocery.model;
 
 public class UserModel {
 	
-	private int id;
+//	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String address;
 	private String phone;
 	private String password;
 	private String imageUrl;
@@ -16,30 +17,32 @@ public class UserModel {
 	}
 	
 	public UserModel(
-			int id,
+//			long id,
 			String firstName, 
 			String lastName, 
 			String email,
+			String address,
 			String password,
 			String phone,
 			String imageUrl
 		) {
-		this.id = id;
+//		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.address = address;
 		this.phone = phone;
 		this.password = password;
 		this.imageUrl = imageUrl;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
+//	public long getId() {
+//		return id;
+//	}
+//	
+//	public void setId(long id) {
+//		this.id = id;
+//	}
 	
 	public String getFirstName() {
 		return firstName;
@@ -64,6 +67,14 @@ public class UserModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	public String getPhoneNumber() {

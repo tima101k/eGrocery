@@ -90,5 +90,9 @@ public class ImageUtil {
 	public String getSavePath(String saveFolder) {
 		return "/Users/aamitkhatri/eclipse-workspace/eGrocery/src/main/webapp/resources/images/"+ saveFolder+"/";
 	}
+	
+	public String getImagePath(String imageName) {
+		return "/resources/images/profile/"+ imageName;
+	}
 
 }

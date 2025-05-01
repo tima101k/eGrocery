@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.eGrocery.model.UserModel;
 import com.eGrocery.service.ProfileService;
+import com.eGrocery.utils.ImageUtil;
 
 /**
  * Servlet implementation class ProfileController
@@ -20,14 +22,15 @@ public class ProfileController extends HttpServlet {
 	
 	// Instance of ProfileService for handling business logic
 	private ProfileService profileService;
+	private final ImageUtil imageUtil = new ImageUtil();
 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileController() {
-        super();
-        // TODO Auto-generated constructor stub
+    public ProfileController() {		
+    	//     super();
+    	this.profileService = new ProfileService();
     }
 
 	/**
@@ -36,8 +39,18 @@ public class ProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession userSession = request.getSession(false);
 		String currentUser = (String) (userSession != null ? userSession.getAttribute("email") : null);
-		// Retrieve profile information from the DashboardService
-		request.setAttribute("profileInformation", profileService.getProfileInfo(currentUser));
+		System.out.println("Current login user email: " + currentUser);
+		// Retrieve profile information from the ProfileService
+		
+		UserModel userData = profileService.getProfileInfo(currentUser);
+		request.setAttribute("email", userData.getEmail());
+		request.setAttribute("firstName", userData.getFirstName());
+		request.setAttribute("imageUrl", userData.getImageUrl());
+		request.setAttribute("phone", userData.getPhoneNumber());
+		request.setAttribute("address", userData.getAddress());
+		String imageUrl = userData.getImageUrl();
+		String imagePath = imageUtil.getImagePath(imageUrl);
+		request.setAttribute("imageUrl", imagePath);
 		request.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(request, response);
 	}
 

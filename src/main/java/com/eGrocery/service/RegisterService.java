@@ -35,9 +35,9 @@ public class RegisterService {
 			System.err.println("Database connection is not available.");
 			return null;
 		}
-
-		String insertQuery = "INSERT INTO user (firstname, lastname, email, password, phone, image_url) "
-				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		System.out.println("User address " + registerModel.getAddress());
+		String insertQuery = "INSERT INTO user (firstname, lastname, email, address, password, phone, image_url) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
@@ -45,9 +45,10 @@ public class RegisterService {
 			insertStmt.setString(1, registerModel.getFirstName());
 			insertStmt.setString(2, registerModel.getLastName());
 			insertStmt.setString(3, registerModel.getEmail());
-			insertStmt.setString(4, registerModel.getPassword());
-			insertStmt.setString(5, registerModel.getPhoneNumber());
-			insertStmt.setString(6, registerModel.getImageUrl());
+			insertStmt.setString(4, registerModel.getAddress());
+			insertStmt.setString(5, registerModel.getPassword());
+			insertStmt.setString(6, registerModel.getPhoneNumber());
+			insertStmt.setString(7, registerModel.getImageUrl());
 			
 
 			return insertStmt.executeUpdate() > 0;

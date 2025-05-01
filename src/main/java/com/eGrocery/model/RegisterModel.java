@@ -9,6 +9,7 @@ public class RegisterModel {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String address;
 	private String password;
 	private String phone;
 	private String imageUrl;
@@ -20,6 +21,7 @@ public class RegisterModel {
 			String firstName, 
 			String lastName, 
 			String email,
+			String address,
 			String password,
 			String phone,
 			String imageUrl
@@ -28,6 +30,7 @@ public class RegisterModel {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.address = address;
 		this.phone = phone;
 		this.password = password;
 		this.imageUrl = imageUrl;
@@ -64,6 +67,14 @@ public class RegisterModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getAddress() {
+		return address;
 	}
 	
 	public String getPhoneNumber() {
