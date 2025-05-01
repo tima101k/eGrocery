@@ -11,7 +11,6 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 
 import com.eGrocery.model.CategoryModel;
-import com.eGrocery.model.UserModel;
 import com.eGrocery.service.CategoryService;
 import com.eGrocery.utils.ImageUtil;
 import com.eGrocery.utils.ValidationUtil;
