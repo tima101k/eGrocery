@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class CategoryController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/category" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/categories" })
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
