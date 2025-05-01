@@ -7,12 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.eGrocery.service.CategoryService;
+
 /**
  * Servlet implementation class AddProductController
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/add_products" })
 public class AddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final CategoryService categoryService = new CategoryService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,6 +29,7 @@ public class AddProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("categoryList", categoryService.getAllCategories());
 		request.getRequestDispatcher("/WEB-INF/pages/admin/add_product.jsp").forward(request, response);
 	}
 
