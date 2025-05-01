@@ -36,6 +36,23 @@ public class UserModel {
 		this.imageUrl = imageUrl;
 	}
 	
+	public UserModel (
+			String firstName, 
+			String lastName, 
+			String email,
+			String address, 
+			String phone,
+			String imageUrl
+		) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.imageUrl = imageUrl;
+	}
+	
 //	public long getId() {
 //		return id;
 //	}
