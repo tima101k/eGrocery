@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - eGrocery</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/category.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/category.css" />
 </head>
 <body>
     <nav class="navbar">

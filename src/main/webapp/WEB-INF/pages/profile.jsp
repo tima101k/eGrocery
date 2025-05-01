@@ -10,8 +10,6 @@ String lastName = (String) (userSession != null ? userSession.getAttribute("last
 String phone = (String) (userSession != null ? userSession.getAttribute("phone") : null);
 String imageUrl = (String) (userSession != null ? userSession.getAttribute("imageUrl") : null);
 String address = (String) (userSession != null ? userSession.getAttribute("address") : null);
-// need to add data in attribute to select it in JSP code using JSTL core tag
-// pageContext.setAttribute("currentUser", currentUser);
 %>
 
 <!DOCTYPE html>
@@ -40,7 +38,7 @@ String address = (String) (userSession != null ? userSession.getAttribute("addre
             <img src="${pageContext.request.contextPath}${imageUrl}" alt="Profile Picture" />
           </div>
           <div class="profile-name">
-            <h2>${firstName}</h2>			
+            <h2>${firstName} ${lastName}</h2>			
             <p class="member-since">Member since: April 15, 2025</p>
           </div>
         </div>
@@ -78,7 +76,11 @@ String address = (String) (userSession != null ? userSession.getAttribute("addre
         </div>
         
         <div class="action-buttons">
-          <button class="edit-button">Edit Profile</button>
+        <a href="${pageContext.request.contextPath}/update_profile">
+          <button class="edit-button">
+          	Edit Profile
+          </button>
+         </a>
           <button class="secondary-button">Order History</button>
         </div>
         
