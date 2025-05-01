@@ -15,6 +15,7 @@ public class LoginService {
 	private boolean isConnectionError = false;
 	
 	/**
+	 * 
 	 * Constructor initializes the database connection. Sets the connection error
 	 * flag if the connection fails.
 	 */
