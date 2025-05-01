@@ -13,11 +13,11 @@
         <div class="container navbar-container">
             <a href="index.html" class="logo">eGrocery Admin</a>
             <ul class="nav-links">
-                <li><a href="products.html">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
                 <li><a href="orders.html">Orders</a></li>
-                <li><a href="customers.html">Customers</a></li>
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="../index.html">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/categories">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
             </ul>
         </div>
     </nav>

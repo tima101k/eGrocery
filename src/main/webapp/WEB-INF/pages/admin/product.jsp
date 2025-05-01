@@ -25,7 +25,9 @@
     <main class="container" style="padding-top: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h1>Manage Products</h1>
-            <button class="btn btn-primary">Add New Product</button>
+            <a href="${pageContext.request.contextPath}/admin/add_products">
+            	<button class="btn btn-primary">Add New Product</button>
+            </a>
         </div>
 
         <div class="card">

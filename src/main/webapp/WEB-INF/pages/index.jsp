@@ -21,7 +21,7 @@
             <a href="index.html" class="logo">eGrocery</a>
             <ul class="nav-links">
                 <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
-                <li><a href="${pageContext.request.contextPath}/products"">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
             	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
                 <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                 <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
