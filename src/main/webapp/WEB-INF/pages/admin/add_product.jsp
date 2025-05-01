@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +38,9 @@
 	                        <label for="product-category" class="form-label">Category</label>
 	                        <select class="form-control" id="product-category" required>
 	                            <option value="">Select a category</option>
-	                            <option value="fruits">Fruits</option>
-	                            <option value="dairy">Dairy</option>
-	                            <option value="bakery">Bakery</option>
-	                            <option value="vegetables">Vegetables</option>
-	                            <option value="meat">Meat & Seafood</option>
-	                            <option value="beverages">Beverages</option>
-	                            <option value="snacks">Snacks</option>
-	                            <option value="frozen">Frozen Foods</option>
+	                            <c:forEach var="category" items="${categoryList}" varStatus="status">
+	                            	<option value="${category.id}">${category.name}</option>
+	                            </c:forEach>
 	                        </select>
 	                    </div>
 	                    
