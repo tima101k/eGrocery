@@ -41,10 +41,10 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		System.out.println("here");
+		
 		UserModel userModel = new UserModel(email, password);
 		Boolean loginStatus = loginService.loginUser(userModel);
-		System.out.println(loginStatus);
+		
 		if (loginStatus != null && loginStatus) {
 			SessionUtil.setAttribute(request, "email", email);
 			if (email.equals("admin@egrocery.com")) {
