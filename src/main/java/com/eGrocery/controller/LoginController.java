@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
 			SessionUtil.setAttribute(request, "email", email);
 			if (email.equals("admin@egrocery.com")) {
 				 CookieUtil.addCookie(response, "role", "admin", 5 * 30);
-				response.sendRedirect(request.getContextPath() + "/dashboard"); // Redirect to /admin dashborad
+				response.sendRedirect(request.getContextPath() + "/admin"); // Redirect to /admin dashborad
 			} else {
 				CookieUtil.addCookie(response, "role", "user", 5 * 30);
 				response.sendRedirect(request.getContextPath() + "/"); // Redirect to /home
