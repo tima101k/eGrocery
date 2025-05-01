@@ -29,7 +29,6 @@ public class ProfileController extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public ProfileController() {		
-    	//     super();
     	this.profileService = new ProfileService();
     }
 
