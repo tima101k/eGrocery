@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.eGrocery.config.Dbconfig;
-import com.eGrocery.model.CategoryModel;
 import com.eGrocery.model.ProductModel;
 
 public class ProductService {
@@ -32,16 +31,16 @@ public class ProductService {
 	 * @param studentModel the student details to be registered
 	 * @return Boolean indicating the success of the operation
 	 */
-	public Boolean addCategory(ProductModel productModel) {
+	public Boolean addProduct(ProductModel productModel) {
 		if (isConnectionError) {
 			System.err.println("Database connection is not available.");
 			return null;
 		}
-		String insertQuery = "INSERT INTO products (name, image, description, category, price, stock_quantity, sku, weight) "
-				+ "VALUES (?, ?, ?, ?, ?, ?,?, ?)";
+		String insertQuery = "INSERT INTO products (name, image, description, category, price, stock_quantity, sku, weight, volume) "
+				+ "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?)";
 		try {
 			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
-			// Insert category details
+			// Insert product details
 			insertStmt.setString(1, productModel.getName());
 			insertStmt.setString(2, productModel.getImage());
 			insertStmt.setString(3, productModel.getDescription());
@@ -50,6 +49,7 @@ public class ProductService {
 			insertStmt.setInt(6, productModel.getStockQuantity());
 			insertStmt.setLong(7, productModel.getSku());
 			insertStmt.setFloat(8, productModel.getWeight());
+			insertStmt.setFloat(9, productModel.getVolume());
 			
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -66,7 +66,7 @@ public class ProductService {
 		}
 
 		// SQL query to fetch details
-		String query = "SELECT * from categories";
+		String query = "SELECT * from products";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			ResultSet result = stmt.executeQuery();
 			List<ProductModel> products = new ArrayList<>();
@@ -82,7 +82,8 @@ public class ProductService {
 						result.getFloat("price"),
 						result.getInt("stock_quantity"),
 						result.getInt("sku"),
-						result.getFloat("weight")
+						result.getFloat("weight"),
+						result.getFloat("volume")
 				));
 			}
 			return products;
