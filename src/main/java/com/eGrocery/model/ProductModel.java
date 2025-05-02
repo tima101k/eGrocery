@@ -10,6 +10,7 @@ public class ProductModel {
 	private int stock_quantity;
 	private int sku;
 	private Float weight;
+	private Float volume;
 	
 	public ProductModel(
 			Long id,
@@ -20,7 +21,8 @@ public class ProductModel {
 			Float price,
 			int stockQuantity,
 			int sku,
-			Float weight
+			Float weight,
+			Float volume
 	) {
 		this.id = id;
 		this.name = name;
@@ -31,6 +33,29 @@ public class ProductModel {
 		this.price = price;
 		this.sku = sku;
 		this.weight = weight;
+		this.setVolume(volume);
+	}
+	
+	public ProductModel(
+			String name,
+			String image,
+			String description,
+			Long category,
+			Float price,
+			int stockQuantity,
+			int sku,
+			Float weight,
+			Float volume
+	) {
+		this.name = name;
+		this.image = image;
+		this.description = description;
+		this.category = category;
+		this.stock_quantity = stockQuantity;
+		this.price = price;
+		this.sku = sku;
+		this.weight = weight;
+		this.volume = volume;
 	}
 	
 	public Long getId() {
@@ -88,5 +113,13 @@ public class ProductModel {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Float getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Float volume) {
+		this.volume = volume;
 	}
 }
