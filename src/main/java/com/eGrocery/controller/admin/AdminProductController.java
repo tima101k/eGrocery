@@ -39,6 +39,7 @@ public class AdminProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("productList", productService.getAllProducts());
 		request.getRequestDispatcher("/WEB-INF/pages/admin/product.jsp").forward(request, response);
 	}
 
@@ -58,7 +59,8 @@ public class AdminProductController extends HttpServlet {
 			if(isAdded == null) {
 				handleError(request, response, "Our server is under maintenance. Please try again later!");
 			}else if(isAdded) {
-				handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/add_categories.jsp");
+				request.setAttribute("productList", productService.getAllProducts());
+				handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
 			};
 		} catch (Exception e) {
 			System.out.println(e);

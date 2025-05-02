@@ -5,12 +5,14 @@ public class ProductModel {
 	private String name;
 	private String image;
 	private String description;
+	private String categoryName;
 	private Long category;
 	private Float price;
 	private int stock_quantity;
 	private int sku;
 	private Float weight;
 	private Float volume;
+	private CategoryModel categoryInfo;
 	
 	public ProductModel(
 			Long id,
@@ -51,6 +53,54 @@ public class ProductModel {
 		this.image = image;
 		this.description = description;
 		this.category = category;
+		this.stock_quantity = stockQuantity;
+		this.price = price;
+		this.sku = sku;
+		this.weight = weight;
+		this.volume = volume;
+	}
+	
+	public ProductModel(
+			Long id,
+			String name,
+			String image,
+			String description,
+			String categoryName,
+			Long category,
+			Float price,
+			int stockQuantity,
+			int sku,
+			Float weight,
+			Float volume
+	) {
+		this.id = id;
+		this.name = name;
+		this.image = image;
+		this.description = description;
+		this.categoryName = categoryName;
+		this.category = category;
+		this.stock_quantity = stockQuantity;
+		this.price = price;
+		this.sku = sku;
+		this.weight = weight;
+		this.volume = volume;
+	}
+	
+	public ProductModel(
+			String name,
+			String image,
+			String description,
+			CategoryModel category,
+			Float price,
+			int stockQuantity,
+			int sku,
+			Float weight,
+			Float volume
+	) {
+		this.name = name;
+		this.image = image;
+		this.description = description;
+		this.categoryInfo = category;
 		this.stock_quantity = stockQuantity;
 		this.price = price;
 		this.sku = sku;
@@ -121,5 +171,21 @@ public class ProductModel {
 
 	public void setVolume(Float volume) {
 		this.volume = volume;
+	}
+
+	public CategoryModel getCategoryInfo() {
+		return categoryInfo;
+	}
+
+	public void setCategoryInfo(CategoryModel categoryInfo) {
+		this.categoryInfo = categoryInfo;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 }

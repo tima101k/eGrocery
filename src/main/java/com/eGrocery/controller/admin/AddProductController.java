@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.eGrocery.service.CategoryService;
+import com.eGrocery.service.ProductService;
 
 /**
  * Servlet implementation class AddProductController
@@ -15,8 +16,9 @@ import com.eGrocery.service.CategoryService;
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin/add_products" })
 public class AddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final CategoryService categoryService = new CategoryService();
-       
+    private final CategoryService categoryService = new CategoryService();
+	private final ProductService productService = new ProductService();
+
     /**
      * @see HttpServlet#HttpServlet()
      */

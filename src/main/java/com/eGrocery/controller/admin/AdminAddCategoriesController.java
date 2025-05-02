@@ -59,6 +59,7 @@ public class AdminAddCategoriesController extends HttpServlet {
 			if(isAdded == null) {
 				handleError(request, response, "Our server is under maintenance. Please try again later!");
 			}else if(isAdded) {
+				request.setAttribute("categoryList", categoryService.getAllCategories());
 				handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/add_categories.jsp");
 			};
 			

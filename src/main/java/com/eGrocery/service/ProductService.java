@@ -66,7 +66,10 @@ public class ProductService {
 		}
 
 		// SQL query to fetch details
-		String query = "SELECT * from products";
+//		String query = "SELECT * from products";
+		String query = "SELECT p.id AS product_id, p.name AS product_name, p.image, p.price, p.stock_quantity, p.description, p.sku, p.weight, "
+				+ "p.volume, c.id AS category_id, c.name AS category_name "
+				+ "FROM products p JOIN categories c ON p.category = c.id";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			ResultSet result = stmt.executeQuery();
 			List<ProductModel> products = new ArrayList<>();
@@ -74,11 +77,12 @@ public class ProductService {
 				// Create and add StudentModel to the list
 				products.add(
 					new ProductModel(
-						result.getLong("id"),
-						result.getString("name"), 
+						result.getLong("product_id"),
+						result.getString("product_name"), 
 						result.getString("image"),
 						result.getString("description"), 
-						result.getLong("category"),
+						result.getString("category_name"), 
+						result.getLong("category_id"),
 						result.getFloat("price"),
 						result.getInt("stock_quantity"),
 						result.getInt("sku"),
