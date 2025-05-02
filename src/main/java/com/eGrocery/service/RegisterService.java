@@ -3,7 +3,6 @@ package com.eGrocery.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.sql.Date;
 
 import com.eGrocery.config.Dbconfig;
 import com.eGrocery.model.RegisterModel;
