@@ -5,20 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ <title>Admin Dashboard - Add new product</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/global.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/add_product.css" />
 </head>
 <body>
-    <header class="header">
-        <div class="header-title">eGrocery Admin</div>
-        <nav class="nav">
-            <a href="#" class="nav-item">Products</a>
-            <a href="#" class="nav-item">Orders</a>
-            <a href="#" class="nav-item">Customers</a>
-            <a href="#" class="nav-item">Categories</a>
-            <a href="#" class="nav-item">Logout</a>
-        </nav>
-    </header>
+   <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="${pageContext.request.contextPath}/admin" class="logo">eGrocery Admin</a>
+            <ul class="nav-links">
+                <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/add_categories">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     
 	<main class="container">
 	    <div class="page-header">
@@ -45,7 +48,7 @@
 	                            <option value="">Select a category</option>
 	                            <c:forEach var="category" items="${categoryList}" varStatus="status">
 	                            	<option value="${category.id}">${category.name}</option>
-	                            </c:forEach>
+	                            </c:forEach> 
 	                        </select>
 	                    </div>
 	                    

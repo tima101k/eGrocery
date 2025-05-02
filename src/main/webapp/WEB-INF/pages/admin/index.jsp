@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar">
         <div class="container navbar-container">
-            <a href="index.html" class="logo">eGrocery Admin</a>
+            <a href="${pageContext.request.contextPath}/admin" class="logo">eGrocery Admin</a>
             <ul class="nav-links">
                 <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
                 <li><a href="orders.html">Orders</a></li>

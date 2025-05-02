@@ -12,20 +12,18 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/add_category.css" />
 </head>
 <body>
-<div class="header">
-    <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <div class="header-title">eGrocery Admin</div>
-            <nav class="nav">
-                <a href="#" class="nav-item">Products</a>
-                <a href="#" class="nav-item">Orders</a>
-                <a href="#" class="nav-item">Customers</a>
-                <a href="#" class="nav-item">Categories</a>
-                <a href="#" class="nav-item">Logout</a>
-            </nav>
-        </div>
-    </div>
-</div>
+<nav class="navbar">
+      <div class="container navbar-container">
+          <a href="index.html" class="logo">eGrocery Admin</a>
+          <ul class="nav-links">
+              <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
+              <li><a href="orders.html">Orders</a></li>
+              <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+              <li><a href="${pageContext.request.contextPath}/admin/add_categories">Categories</a></li>
+              <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
+          </ul>
+      </div>
+    </nav>
 <div class="container">
 <div class="page-header">
     <h1 class="page-title">Manage Categories</h1>

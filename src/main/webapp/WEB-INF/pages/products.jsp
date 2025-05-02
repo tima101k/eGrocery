@@ -33,7 +33,6 @@
 
         <div class="product-grid">
          <c:forEach var="product" items="${productList}" varStatus="status">
-         	
             <div class="product-card">
             	<a href="${pageContext.request.contextPath}/about_product">
                 	<img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=400&q=80" 

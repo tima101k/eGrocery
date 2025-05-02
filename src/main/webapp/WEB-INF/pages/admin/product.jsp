@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +14,11 @@
         <div class="container navbar-container">
             <a href="index.html" class="logo">eGrocery Admin</a>
             <ul class="nav-links">
-                <li><a href="products.html">Products</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
                 <li><a href="orders.html">Orders</a></li>
-                <li><a href="customers.html">Customers</a></li>
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/add_categories">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -43,39 +44,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="product" items="${productList}" varStatus="status">
                     <tr>
-                        <td>1</td>
-                        <td>Organic Bananas</td>
-                        <td>Fruits</td>
-                        <td>$2.99</td>
-                        <td>50</td>
+                        <td>${product.id}</td>
+                        <td>${product.name }</td>
+                        <td>${product.categoryName}</td>
+                        <td>${product.stockQuantity}</td>
+                        <td>${product.categoryName}</td>
                         <td>
                             <button class="btn" style="margin-right: 0.5rem;">Edit</button>
                             <button class="btn" style="color: red;">Delete</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Fresh Milk</td>
-                        <td>Dairy</td>
-                        <td>$3.49</td>
-                        <td>30</td>
-                        <td>
-                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
-                            <button class="btn" style="color: red;">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Whole Wheat Bread</td>
-                        <td>Bakery</td>
-                        <td>$4.99</td>
-                        <td>25</td>
-                        <td>
-                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
-                            <button class="btn" style="color: red;">Delete</button>
-                        </td>
-                    </tr>
+                  </c:forEach>  
                 </tbody>
             </table>
         </div>
