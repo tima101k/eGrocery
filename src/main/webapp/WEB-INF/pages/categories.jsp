@@ -10,14 +10,17 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container navbar-container">
+         <div class="container navbar-container">
             <a href="index.html" class="logo">eGrocery</a>
             <ul class="nav-links">
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
+                <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
+            	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                <c:if test="${not empty sessionScope.email}">
+	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+	        	</c:if>
             </ul>
         </div>
     </nav>

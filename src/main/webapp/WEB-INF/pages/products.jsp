@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +14,14 @@
         <div class="container navbar-container">
             <a href="index.html" class="logo">eGrocery</a>
             <ul class="nav-links">
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
+                <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
+                <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
+            	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                <c:if test="${not empty sessionScope.email}">
+	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+	        	</c:if>
             </ul>
         </div>
     </nav>
@@ -26,16 +30,18 @@
         <h1 style="margin-bottom: 2rem;">All Products</h1>
 
         <div class="product-grid">
+         <c:forEach var="product" items="${productList}" varStatus="status">
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=400&q=80" 
                      alt="Organic Bananas">
                 <div class="product-card-content">
-                    <h3>Organic Bananas</h3>
-                    <p class="price">$2.99/bunch</p>
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card">
+         </c:forEach>
+            <!-- <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80" 
                      alt="Fresh Milk">
                 <div class="product-card-content">
@@ -79,7 +85,7 @@
                     <p class="price">$2.49/bunch</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </main>
 

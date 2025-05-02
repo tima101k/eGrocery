@@ -23,8 +23,10 @@
                 <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
             	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
-                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+            	<c:if test="${empty sessionScope.email}">
+	                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+	                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                </c:if>
                 <c:if test="${not empty sessionScope.email}">
 	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
 	        	</c:if>
