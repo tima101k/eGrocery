@@ -17,8 +17,10 @@
                 <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
             	<li><a href=" ${pageContext.request.contextPath}/cart"">Cart</a></li>
-                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+            	<c:if test="${empty sessionScope.email}">
+	                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+	                <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                </c:if>
                 <c:if test="${not empty sessionScope.email}">
 	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
 	        	</c:if>
@@ -31,61 +33,20 @@
 
         <div class="product-grid">
          <c:forEach var="product" items="${productList}" varStatus="status">
+         	
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=400&q=80" 
+            	<a href="${pageContext.request.contextPath}/about_product">
+                	<img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=400&q=80" 
                      alt="Organic Bananas">
+                 </a>
                 <div class="product-card-content">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
                 </div>
             </div>
+            
          </c:forEach>
-            <!-- <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80" 
-                     alt="Fresh Milk">
-                <div class="product-card-content">
-                    <h3>Fresh Milk</h3>
-                    <p class="price">$3.49/gallon</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80" 
-                     alt="Whole Grain Bread">
-                <div class="product-card-content">
-                    <h3>Whole Grain Bread</h3>
-                    <p class="price">$4.99/loaf</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=400&q=80" 
-                     alt="Farm Fresh Eggs">
-                <div class="product-card-content">
-                    <h3>Farm Fresh Eggs</h3>
-                    <p class="price">$5.99/dozen</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1598030304671-5aa1d6f21128?auto=format&fit=crop&w=400&q=80" 
-                     alt="Fresh Apples">
-                <div class="product-card-content">
-                    <h3>Fresh Apples</h3>
-                    <p class="price">$1.99/lb</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1598449356475-b9f71db7d847?auto=format&fit=crop&w=400&q=80" 
-                     alt="Organic Carrots">
-                <div class="product-card-content">
-                    <h3>Organic Carrots</h3>
-                    <p class="price">$2.49/bunch</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
-                </div>
-            </div> -->
         </div>
     </main>
 
