@@ -1,8 +1,5 @@
 package com.eGrocery.model;
 
-import java.time.LocalDate;
-
-
 public class RegisterModel {
 
 	private int id;
