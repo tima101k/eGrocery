@@ -91,12 +91,13 @@ public class RegistrationController extends HttpServlet {
 		String number = req.getParameter("phone");
 		String address = req.getParameter("address");
 		String password = req.getParameter("password");
+		long roleId = 1746209646;
 		
 		Part image = req.getPart("profileImage");
 		String imageUrl = imageUtil.getImageNameFromPart(image);
 		
 		String encPassword = PasswordUtil.encrypt(email, password);
-		return new RegisterModel(1, firstName, lastName, email, address, encPassword, number,imageUrl);
+		return new RegisterModel(1, firstName, lastName, email, address, encPassword, number,imageUrl, roleId);
 		
 	}
 	

@@ -39,8 +39,8 @@ public class ProfileController extends HttpServlet {
 		HttpSession userSession = request.getSession(false);
 		String currentUser = (String) (userSession != null ? userSession.getAttribute("email") : null);
 		System.out.println("Current login user email: " + currentUser);
+
 		// Retrieve profile information from the ProfileService
-		
 		UserModel userData = profileService.getProfileInfo(currentUser);
 		request.setAttribute("email", userData.getEmail());
 		request.setAttribute("firstName", userData.getFirstName());

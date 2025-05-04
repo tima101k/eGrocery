@@ -69,6 +69,7 @@ public class UpdateProfile extends HttpServlet {
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
+		long roleId = 1746209646;
 		
 		Part image = request.getPart("profileImage");
 		String imagePath = imageUtil.getImageNameFromPart(image);
@@ -76,7 +77,7 @@ public class UpdateProfile extends HttpServlet {
 		
 		uploadImage(request);
 
-		UserModel user = new UserModel(firstName, lastName, email, address, phone, imagePath);
+		UserModel user = new UserModel(firstName, lastName, email, address, phone, imagePath, roleId);
 		
 		 Boolean result = updateService.updateUserProfile(user);
 		    if (result != null && result) {

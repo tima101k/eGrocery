@@ -5,10 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import com.eGrocery.service.CategoryService;
-import com.eGrocery.service.ProductService;
 
 /**
  * Servlet implementation class AddProductController
@@ -17,7 +18,6 @@ import com.eGrocery.service.ProductService;
 public class AddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final CategoryService categoryService = new CategoryService();
-	private final ProductService productService = new ProductService();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,8 +31,15 @@ public class AddProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("categoryList", categoryService.getAllCategories());
-		request.getRequestDispatcher("/WEB-INF/pages/admin/add_product.jsp").forward(request, response);
+		// Initialize necessary objects and variables
+		HttpSession userSession = request.getSession(false);
+		String email = (String) (userSession != null ? userSession.getAttribute("email") : null);
+		if(email == null) {
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+		} else {
+			request.setAttribute("categoryList", categoryService.getAllCategories());
+			request.getRequestDispatcher("/WEB-INF/pages/admin/add_product.jsp").forward(request, response);
+		}
 	}
 
 	/**

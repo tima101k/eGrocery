@@ -12,7 +12,7 @@ import com.eGrocery.service.ProductService;
 /**
  * Servlet implementation class ProductController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/products" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/product" })
 public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductService productService = new ProductService();
