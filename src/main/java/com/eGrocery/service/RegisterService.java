@@ -2,7 +2,10 @@ package com.eGrocery.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.eGrocery.config.Dbconfig;
 import com.eGrocery.model.RegisterModel;
@@ -35,8 +38,8 @@ public class RegisterService {
 			return null;
 		}
 		System.out.println("User address " + registerModel.getAddress());
-		String insertQuery = "INSERT INTO user (firstname, lastname, email, address, password, phone, image_url) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String insertQuery = "INSERT INTO user (firstname, lastname, email, address, password, phone, image_url, role) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
@@ -48,11 +51,42 @@ public class RegisterService {
 			insertStmt.setString(5, registerModel.getPassword());
 			insertStmt.setString(6, registerModel.getPhoneNumber());
 			insertStmt.setString(7, registerModel.getImageUrl());
-			
+			insertStmt.setLong(8, registerModel.getRoleId());
 
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {
 			System.err.println("Error during user registration: " + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+
+	public List<RegisterModel> getAllUsers() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		// SQL query to fetch details
+		String query = "SELECT * from users";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			ResultSet result = stmt.executeQuery();
+			List<RegisterModel> categories = new ArrayList<>();
+
+			while (result.next()) {
+				// Create and add StudentModel to the list
+				categories.add(
+					new RegisterModel(
+						result.getLong("id"),
+						result.getString("firstname"),
+						result.getString("lastname"),
+						result.getString("email")
+				));
+			}
+			return categories;
+		} catch (SQLException e) {
+			// Log and handle exceptions related to student query execution
 			e.printStackTrace();
 			return null;
 		}

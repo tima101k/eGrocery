@@ -2,7 +2,7 @@ package com.eGrocery.model;
 
 public class RegisterModel {
 
-	private int id;
+	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -10,6 +10,7 @@ public class RegisterModel {
 	private String password;
 	private String phone;
 	private String imageUrl;
+	private Long roleId;
 	
 	// RegisterModel
 	
@@ -21,7 +22,8 @@ public class RegisterModel {
 			String address,
 			String password,
 			String phone,
-			String imageUrl
+			String imageUrl,
+			Long roleId
 		) {
 		this.id = id;
 		this.firstName = firstName;
@@ -31,9 +33,22 @@ public class RegisterModel {
 		this.phone = phone;
 		this.password = password;
 		this.imageUrl = imageUrl;
+		this.roleId = roleId;
 	}
 	
-	public int getId() {
+	public RegisterModel(
+			long id,
+			String firstName, 
+			String lastName, 
+			String email
+		) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+	
+	public long getId() {
 		return id;
 	}
 	
@@ -96,5 +111,13 @@ public class RegisterModel {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 }

@@ -49,7 +49,7 @@ private boolean isConnectionError = false;
 				
 				
 				// Create StudentModel instance
-				user = new UserModel(firstName, lastName, email, address, "", number, imageUrl);
+				user = new UserModel(firstName, lastName, email, address, number, imageUrl);
 
 				// Add the student to the list
 				System.out.println("Error query 1");

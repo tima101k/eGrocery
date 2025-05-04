@@ -1,8 +1,6 @@
 package com.eGrocery.model;
 
 public class UserModel {
-	
-//	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -10,6 +8,7 @@ public class UserModel {
 	private String phone;
 	private String password;
 	private String imageUrl;
+	private Long roleId;
 	
 	public UserModel(String email, String pasword) {
 		this.email = email;
@@ -17,16 +16,15 @@ public class UserModel {
 	}
 	
 	public UserModel(
-//			long id,
 			String firstName, 
 			String lastName, 
 			String email,
 			String address,
 			String password,
 			String phone,
-			String imageUrl
+			String imageUrl,
+			Long roleId
 		) {
-//		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -34,6 +32,26 @@ public class UserModel {
 		this.phone = phone;
 		this.password = password;
 		this.imageUrl = imageUrl;
+		this.setRoleId(roleId);
+	}
+	
+	public UserModel (
+			String firstName, 
+			String lastName, 
+			String email,
+			String address, 
+			String phone,
+			String imageUrl,
+			Long roleId
+		) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.imageUrl = imageUrl;
+		this.roleId = roleId;
 	}
 	
 	public UserModel (
@@ -116,5 +134,13 @@ public class UserModel {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 }
