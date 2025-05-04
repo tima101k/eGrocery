@@ -17,10 +17,10 @@
           <a href="index.html" class="logo">eGrocery Admin</a>
           <ul class="nav-links">
               <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
-              <li><a href="orders.html">Orders</a></li>
+              <li><a href="${pageContext.request.contextPath}/admin/order">Orders</a></li>
               <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
               <li><a href="${pageContext.request.contextPath}/admin/add_categories">Categories</a></li>
-              <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
+              <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
           </ul>
       </div>
     </nav>

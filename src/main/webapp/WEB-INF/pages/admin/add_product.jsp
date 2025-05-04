@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <title>Admin Dashboard - Add new product</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/global.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/add_product.css" />
+<title>Admin Dashboard - Add new product</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/global.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/add_product.css" />
 </head>
 <body>
    <nav class="navbar">
@@ -15,10 +15,10 @@
             <a href="${pageContext.request.contextPath}/admin" class="logo">eGrocery Admin</a>
             <ul class="nav-links">
                 <li><a href="${pageContext.request.contextPath}/admin/products">Products</a></li>
-                <li><a href="orders.html">Orders</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/order">Orders</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/customers">Customers</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/add_categories">Categories</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
             </ul>
         </div>
     </nav>

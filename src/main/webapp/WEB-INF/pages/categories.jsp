@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - eGrocery</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/category.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
     <nav class="navbar">
@@ -28,6 +28,7 @@
                 </c:if>
                 <c:if test="${not empty sessionScope.email}">
 	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 	        	</c:if>
             </ul>
         </div>

@@ -23,6 +23,7 @@
                 </c:if>
                 <c:if test="${not empty sessionScope.email}">
 	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 	        	</c:if>
             </ul>
         </div>

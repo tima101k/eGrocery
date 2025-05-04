@@ -11,14 +11,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home - eGrocery</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css" />
 </head>
 
 <body>
     <nav class="navbar">
         <div class="container navbar-container">
-            <a href="index.html" class="logo">eGrocery</a>
+            <a href="${pageContext.request.contextPath}"" class="logo">eGrocery</a>
             <ul class="nav-links">
                 <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Products</a></li>
@@ -29,6 +29,7 @@
                 </c:if>
                 <c:if test="${not empty sessionScope.email}">
 	            	<li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 	        	</c:if>
             </ul>
         </div>
