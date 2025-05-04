@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -26,7 +28,14 @@ public class AdminDashboard extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/pages/admin/index.jsp").forward(request, response);
+		// Initialize necessary objects and variables
+		HttpSession userSession = request.getSession(false);
+		String email = (String) (userSession != null ? userSession.getAttribute("email") : null);
+		if(email == null) {
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+		} else {			
+			request.getRequestDispatcher("/WEB-INF/pages/admin/index.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
@@ -39,8 +40,15 @@ public class AdminProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("productList", productService.getAllProducts());
-		request.getRequestDispatcher("/WEB-INF/pages/admin/product.jsp").forward(request, response);
+		// Initialize necessary objects and variables
+		HttpSession userSession = request.getSession(false);
+		String email = (String) (userSession != null ? userSession.getAttribute("email") : null);
+		if(email == null) {
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+		} else {			
+			request.setAttribute("productList", productService.getAllProducts());
+			request.getRequestDispatcher("/WEB-INF/pages/admin/product.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -79,8 +87,8 @@ public class AdminProductController extends HttpServlet {
 		String volume = req.getParameter("volume");
 		
 		System.out.println("Category: "+ category);
-		Part image = req.getPart("productImage");
-		String productImage = imageUtil.getImageNameFromPart(image);
+//		Part image = req.getPart("productImage");
+//		String productImage = imageUtil.getImageNameFromPart(image);
 		
 		// Check for null or empty fields first
 		if (ValidationUtil.isNullOrEmpty(name))
