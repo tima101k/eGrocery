@@ -100,7 +100,7 @@
 		            <td>${category.id}</td>
 		            <td>
 		                <div class="category-icon">
-		                    <img src="${category.icon}" alt="${category.name} icon">
+		                    <img src="${pageContext.request.contextPath}/resources/images/category/${category.icon}" alt="${category.name} icon">
 		                </div>
 		            </td>
 		            <td>${category.name}</td>

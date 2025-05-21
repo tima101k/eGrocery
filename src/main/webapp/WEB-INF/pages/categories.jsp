@@ -40,7 +40,7 @@
         <div class="grid grid-cols-2">
            <c:forEach var="category" items="${categoryList}" varStatus="status">
 	            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
-	                <img src="${category.icon}" 
+	                <img src="${pageContext.request.contextPath}/resources/images/category/${category.icon}" 
 	                     alt="Fruits & Vegetables" 
 	                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
 	                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">

@@ -113,7 +113,7 @@
 	            <div class="actions">
 	                <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
 	                <input type="hidden" name="action" value="add">
-	                <button type="submit" class="btn btn-primary">Add Product</button>
+	                <button type="submit" class="btn btn-primary">Update Product</button>
 	            </div>
 	        </form>
 	    </div>

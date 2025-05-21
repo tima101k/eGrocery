@@ -52,9 +52,18 @@
                         <td>${product.stockQuantity}</td>
                         <td>${product.categoryName}</td>
                         <td>
-                            <button class="btn" style="margin-right: 0.5rem;">Edit</button>
-                            <button class="btn" style="color: red;">Delete</button>
-                        </td>
+                        	<form class="actions" method="post">
+                        		<input type="hidden" name="productId" value="${product.id}">
+				        		<input type="hidden" name="action" value="update">
+	                     		<button class="btn" style="margin-right: 0.5rem;">Edit</button>
+	                     	</form>
+                        
+				        	<form class="actions" method="post">
+				        		<input type="hidden" name="productId" value="${product.id}">
+				        		<input type="hidden" name="action" value="delete">
+	                            <button class="btn" style="color: red;">Delete</button>     
+                       		</form>
+                       </td>
                     </tr>
                   </c:forEach>  
                 </tbody>

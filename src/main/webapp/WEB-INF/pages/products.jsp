@@ -41,7 +41,7 @@
                  </a>
                 <div class="product-card-content">
                     <h3>${product.name}</h3>
-                    <p class="price">${product.price}</p>
+                    <p class="price">Rs. ${product.price}</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
                 </div>
             </div>
