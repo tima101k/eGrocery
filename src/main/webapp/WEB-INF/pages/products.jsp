@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +36,8 @@
         <div class="product-grid">
          <c:forEach var="product" items="${productList}" varStatus="status">
             <div class="product-card">
-            	<a href="${pageContext.request.contextPath}/about_product">
-                	<img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=400&q=80" 
-                     alt="Organic Bananas">
+            	<a href="${pageContext.request.contextPath}/product">
+                	<img src="${pageContext.request.contextPath}/resources/images/products/${product.image}" alt="Organic Bananas">
                  </a>
                 <div class="product-card-content">
                     <h3>${product.name}</h3>
@@ -45,7 +45,6 @@
                     <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
                 </div>
             </div>
-            
          </c:forEach>
         </div>
     </main>
