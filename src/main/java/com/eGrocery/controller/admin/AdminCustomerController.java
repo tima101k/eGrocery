@@ -31,7 +31,7 @@ public class AdminCustomerController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/pages/admin/manage_customer.jsp").forward(request, response);
+		// request.getRequestDispatcher("/WEB-INF/pages/admin/manage_customer.jsp").forward(request, response);
 		// Initialize necessary objects and variables
 		HttpSession userSession = request.getSession(false);
 		String email = (String) (userSession != null ? userSession.getAttribute("email") : null);

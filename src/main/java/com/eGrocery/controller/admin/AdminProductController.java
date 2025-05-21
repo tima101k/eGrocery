@@ -67,8 +67,15 @@ public class AdminProductController extends HttpServlet {
 			if(isAdded == null) {
 				handleError(request, response, "Our server is under maintenance. Please try again later!");
 			}else if(isAdded) {
-				request.setAttribute("productList", productService.getAllProducts());
-				handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
+				try {
+					if(uploadImage(request))
+						request.setAttribute("productList", productService.getAllProducts());
+						handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
+				}catch (IOException | ServletException e){
+					handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+					e.printStackTrace(); // Log the exception
+				};
+				
 			};
 		} catch (Exception e) {
 			System.out.println(e);
@@ -87,8 +94,8 @@ public class AdminProductController extends HttpServlet {
 		String volume = req.getParameter("volume");
 		
 		System.out.println("Category: "+ category);
-//		Part image = req.getPart("productImage");
-//		String productImage = imageUtil.getImageNameFromPart(image);
+		Part image = req.getPart("productImage");
+		String productImage = imageUtil.getImageNameFromPart(image);
 		
 		// Check for null or empty fields first
 		if (ValidationUtil.isNullOrEmpty(name))
@@ -147,5 +154,9 @@ public class AdminProductController extends HttpServlet {
 		req.getRequestDispatcher(redirectPage).forward(req, resp);
 	}
 	
+	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+		Part image = req.getPart("productImage");
+		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "products");
+	}
 
 }

@@ -30,7 +30,7 @@ public class ProductController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("productList", productService.getAllProducts());
-		request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
 	}
 
 	/**
