@@ -69,22 +69,22 @@ public class RegisterService {
 		}
 
 		// SQL query to fetch details
-		String query = "SELECT * from users";
+		String query = "SELECT * from user";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			ResultSet result = stmt.executeQuery();
-			List<RegisterModel> categories = new ArrayList<>();
+			List<RegisterModel> users = new ArrayList<>();
 
 			while (result.next()) {
 				// Create and add StudentModel to the list
-				categories.add(
+				users.add(
 					new RegisterModel(
-						result.getLong("id"),
+						result.getLong("user_id"),
 						result.getString("firstname"),
 						result.getString("lastname"),
 						result.getString("email")
 				));
 			}
-			return categories;
+			return users;
 		} catch (SQLException e) {
 			// Log and handle exceptions related to student query execution
 			e.printStackTrace();
