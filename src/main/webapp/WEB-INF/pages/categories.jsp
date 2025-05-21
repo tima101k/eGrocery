@@ -38,38 +38,16 @@
         <h1 style="margin-bottom: 2rem;">Shop by Category</h1>
 
         <div class="grid grid-cols-2">
-            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
-                <img src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&w=400&q=80" 
-                     alt="Fruits & Vegetables" 
-                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
-                    <h3 style="color: white; font-size: 1.5rem;">Fruits & Vegetables</h3>
-                </div>
-            </a>
-            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
-                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80" 
-                     alt="Dairy & Eggs" 
-                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
-                    <h3 style="color: white; font-size: 1.5rem;">Dairy & Eggs</h3>
-                </div>
-            </a>
-            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
-                <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=80" 
-                     alt="Meat & Fish" 
-                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
-                    <h3 style="color: white; font-size: 1.5rem;">Meat & Fish</h3>
-                </div>
-            </a>
-            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80" 
-                     alt="Bakery" 
-                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
-                    <h3 style="color: white; font-size: 1.5rem;">Bakery</h3>
-                </div>
-            </a>
+           <c:forEach var="category" items="${categoryList}" varStatus="status">
+	            <a href="#" class="card" style="text-align: center; text-decoration: none; color: inherit; position: relative;">
+	                <img src="${category.icon}" 
+	                     alt="Fruits & Vegetables" 
+	                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
+	                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+	                    <h3 style="color: white; font-size: 1.5rem;">${category.name}</h3>
+	                </div>
+	            </a>
+            </c:forEach> 
         </div>
     </main>
 

@@ -10,7 +10,7 @@
 <body>
         <nav class="navbar">
         <div class="container navbar-container">
-            <a href="${pageContext.request.contextPath}"" class="logo">eGrocery</a>
+            <a href="${pageContext.request.contextPath}" class="logo">eGrocery</a>
             <ul class="nav-links">
                 <li><a href="${pageContext.request.contextPath}/categories">Categories</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Products</a></li>

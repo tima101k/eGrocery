@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>About prodct - eGrocery</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product.css" />
 </head>
 <body>
