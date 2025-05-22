@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 
 import com.eGrocery.model.ProductModel;
+import com.eGrocery.service.CategoryService;
 import com.eGrocery.service.ProductService;
 import com.eGrocery.utils.ImageUtil;
 import com.eGrocery.utils.ValidationUtil;
@@ -27,6 +28,7 @@ public class AdminProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final ImageUtil imageUtil = new ImageUtil();
 	private final ProductService productService = new ProductService();
+	 private final CategoryService categoryService = new CategoryService();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -56,27 +58,30 @@ public class AdminProductController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String validationMessage = validateProductForm(request);
-			if (validationMessage != null) {
-				System.out.println(validationMessage);
-				handleError(request, response, validationMessage);
-				return;
-			}
-			ProductModel productModel = extractProductModel(request);
-			Boolean isAdded = productService.addProduct(productModel);
-			if(isAdded == null) {
-				handleError(request, response, "Our server is under maintenance. Please try again later!");
-			}else if(isAdded) {
-				try {
-					if(uploadImage(request))
-						request.setAttribute("productList", productService.getAllProducts());
-						handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
-				}catch (IOException | ServletException e){
-					handleError(request, response, "An error occurred while uploading the image. Please try again later!");
-					e.printStackTrace(); // Log the exception
-				};
-				
+			String action = request.getParameter("action");
+			
+			switch (action) {
+				case "add":
+					System.out.println("add");
+					handleAdd(request, response);
+					break;
+					
+				case "update":
+					 System.out.println("update");
+					 long productIdo = Long.parseLong(request.getParameter("productId"));
+					 request.setAttribute("categoryList", categoryService.getAllCategories());
+					 request.getRequestDispatcher("/WEB-INF/pages/admin/update_product.jsp").forward(request, response);
+					 handleUpdate(request, response, productIdo);
+					 doGet(request, response);
+					 break;
+					
+				case "delete":
+					System.out.println("delete");
+					long productId = Long.parseLong(request.getParameter("productId"));
+					handleDelete(request, response, productId);
+					break;
 			};
+
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("Something went wrong while adding product");
@@ -158,5 +163,91 @@ public class AdminProductController extends HttpServlet {
 		Part image = req.getPart("productImage");
 		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "products");
 	}
+	
+	/**
+	 * Handles the delete action by removing a student from the database and
+	 * forwarding to the dashboard page.
+	 * 
+	 * @param request   The HttpServletRequest object containing the request data.
+	 * @param response  The HttpServletResponse object used to return the response.
+	 * @param studentId The ID of the student to be deleted.
+	 * @throws ServletException If an error occurs during request processing.
+	 * @throws IOException      If an input or output error occurs.
+	 */
+	private void handleDelete(HttpServletRequest request, HttpServletResponse response, long productId)
+			throws ServletException, IOException {
+		boolean success = productService.deleteProduct(productId);
 
+		if (success) {
+			System.out.println("Deletion successful");
+		} else {
+			System.out.println("Deletion failed");
+		}
+
+		// Forward to the dashboard to reflect changes
+		doGet(request, response);
+	}
+	
+	private void handleAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException   {
+		try {
+			String validationMessage = validateProductForm(request);
+			if (validationMessage != null) {
+				System.out.println(validationMessage);
+				handleError(request, response, validationMessage);
+				return;
+			}
+			ProductModel productModel = null;
+			try {
+				productModel = extractProductModel(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Boolean isAdded = productService.addProduct(productModel);
+			if(isAdded == null) {
+				handleError(request, response, "Our server is under maintenance. Please try again later!");
+			}else if(isAdded) {
+				try {
+					if(uploadImage(request))
+						request.setAttribute("productList", productService.getAllProducts());
+						handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
+				}catch (IOException | ServletException e){
+					handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+					e.printStackTrace(); // Log the exception
+				};
+			};
+		} catch(IOException | ServletException e) {
+			handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+			e.printStackTrace(); // Log the exception
+		}
+	}
+	
+	private void handleUpdate(HttpServletRequest request, HttpServletResponse response, long productId)
+			throws ServletException, IOException {
+		String validationMessage = validateProductForm(request);
+		if (validationMessage != null) {
+			System.out.println(validationMessage);
+			handleError(request, response, validationMessage);
+			return;
+		}
+		ProductModel productModel = null;
+		try {
+			productModel = extractProductModel(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Boolean isUpdated = productService.updateProduct(productModel);
+		if(isUpdated) {
+			try {
+				if(uploadImage(request))
+					request.setAttribute("productList", productService.getAllProducts());
+					handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/product.jsp");
+			}catch (IOException | ServletException e){
+				handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+				e.printStackTrace(); // Log the exception
+			};
+		};
+		doGet(request, response);
+	}
 }

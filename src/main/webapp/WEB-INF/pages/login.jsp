@@ -14,7 +14,7 @@
   <div class="modal">
     <div class="modal-content">
       <div class="image-section">
-        <img src="pngtree-cartoon-grocery-bag-on-white-background-picture-image_7862587.png" alt="Grocery Illustration" />
+        <img src="${pageContext.request.contextPath}/resources/images/assets/LOGO.png" alt="Grocery Illustration" />
       </div>
       <div class="form-section">
         <span class="close">&times;</span>

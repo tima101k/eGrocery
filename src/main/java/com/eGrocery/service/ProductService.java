@@ -97,5 +97,49 @@ public class ProductService {
 			return null;
 		}
 	}
+	
+	public boolean deleteProduct(long productID) {
+		if (isConnectionError)
+			return false;
+
+		String deleteQuery = "DELETE FROM products WHERE id = ?";
+		try (PreparedStatement stmt = dbConn.prepareStatement(deleteQuery)) {
+			stmt.setLong(1, productID);
+
+			int rowsDeleted = stmt.executeUpdate();
+			return rowsDeleted > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean updateProduct(ProductModel productModel) {
+		if (isConnectionError)
+			return false;
+
+		String updateQuery = "UPDATE student SET name = ?, image = ?, " + "description = ?, dob = ?, category = ?,"
+				+ "price = ?, stock_quantity = ?, sku = ?, weight = ?, volume = ?  WHERE id = ?";
+		try (PreparedStatement insertStmt = dbConn.prepareStatement(updateQuery)) {
+			
+			insertStmt.setString(1, productModel.getName());
+			insertStmt.setString(2, productModel.getImage());
+			insertStmt.setString(3, productModel.getDescription());
+			insertStmt.setLong(4, productModel.getCategory());
+			insertStmt.setFloat(5, productModel.getPrice());
+			insertStmt.setInt(6, productModel.getStockQuantity());
+			insertStmt.setLong(7, productModel.getSku());
+			insertStmt.setFloat(8, productModel.getWeight());
+			insertStmt.setFloat(9, productModel.getVolume());
+			
+			insertStmt.setLong(10, productModel.getCategory());
+			
+			int rowsUpdated = insertStmt.executeUpdate();
+			return rowsUpdated > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }

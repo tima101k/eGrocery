@@ -28,7 +28,7 @@ String address = (String) (userSession != null ? userSession.getAttribute("addre
   <div class="container">
     <div class="profile-card">
       <div class="image-section">
-        <img src="${imageUrl}" alt="Profile Illustration" class="side-image" />
+        <img src="${pageContext.request.contextPath}/resources/images/assets/LOGO.png" alt="Profile Illustration" class="side-image" />
       </div>
       <div class="profile-section">
         <h1>EGrocery</h1>

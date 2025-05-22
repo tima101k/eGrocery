@@ -13,7 +13,7 @@
   <div class="modal">
     <div class="modal-content">
       <div class="image-section">
-        <img src="LOGO.png" alt="Register Illustration" />
+        <img src="${pageContext.request.contextPath}/resources/images/assets/LOGO.png" alt="Register Illustration" />
       </div>
       <div class="form-section">
         <h2>EGrocery</h2>

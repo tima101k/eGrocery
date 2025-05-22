@@ -67,8 +67,14 @@ public class AdminAddCategoriesController extends HttpServlet {
 			if(isAdded == null) {
 				handleError(request, response, "Our server is under maintenance. Please try again later!");
 			}else if(isAdded) {
-				request.setAttribute("categoryList", categoryService.getAllCategories());
-				handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/add_categories.jsp");
+				try {
+					if(uploadImage(request))
+						request.setAttribute("categoryList", categoryService.getAllCategories());
+					handleSuccess(request, response, "Your category is successfully created!", "/WEB-INF/pages/admin/add_categories.jsp");
+				}catch (IOException | ServletException e){
+					handleError(request, response, "An error occurred while uploading the image. Please try again later!");
+					e.printStackTrace(); // Log the exception
+				};
 			};
 			
 		} catch (Exception e) {
@@ -130,6 +136,9 @@ public class AdminAddCategoriesController extends HttpServlet {
 		req.getRequestDispatcher(redirectPage).forward(req, resp);
 	}
 	
-	
+	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+		Part image = req.getPart("icon");
+		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "category");
+	}
 
 }
